@@ -6,10 +6,10 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["*", "storage", "activeTab", "scripting", "tabs"],
+    "permissions": ["storage", "activeTab", "scripting", "tabs", "background"],
 
     "action": {
-        "default_popup": "popup.html",
+        "default_popup": "index.html",
         "default_icon": {
             "16": "/images/get_started16.png",
             "32": "/images/get_started32.png",
