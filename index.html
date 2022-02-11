@@ -14,23 +14,75 @@
 </head>
 
 <body>
+
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12 text-center mt-5">
+        <nav class="navbar navbar-expand-lg navbar-light rounded-lg mt-2" style="background-color: #e3f2fd;">
+            <a class="navbar-brand" href="#">Video Recorder</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <!-- <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Learn</a>
+                    </li> -->
+                </ul>
+                <div>
+                    <div class="google-btn" id="authorize_button" style="display: none;">
+                        <div class="google-icon-wrapper text-center">
+                            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+                        </div>
+                        <p class="btn-text"><b>Sign in with google</b></p>
+                    </div>
+                    <div class="google-btn bg-danger" id="signout_button" style="display: none;">
+                        <div class="google-icon-wrapper text-center">
+                            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+                        </div>
+                        <p class="btn-text text-center"><b>Sign Out</b></p>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="row mt-5">
+            <div class="col-sm-12 text-center">
                 <h1 class="text-center">Video Recorder</h1>
                 <br>
-                <button class="btn btn-primary m-2" id="start">Start</button>
-                <button class="btn btn-danger m-2" id="stop">Stop</button>
+                <button class="btn btn-primary m-2" id="start" disabled>Start Recording </button>
+                <button class="btn btn-danger m-2" id="stop" disabled>Stop Recording</button>
+                <p id="recordTime" class="mt-4" style="font-size:34px;">00:00</p>
+                <div class="progress mt-2" id="uploadProgressContainer" style="margin:auto;display:none; width:500px;">
+                    <div class="progress-bar bg-success" id="uploadProgress" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                </div>
+                <p id="recordingStatus" class="text-center mt-3"></p>
+                <div id="shareableLinkConatiner" class="form-inline" style="display:none ;">
+                    <!-- The text field -->
+                    <input class="form-control" type="text" value="" id="shareableLink">
+                    <!-- The button used to copy the text -->
+                    <button class="btn btn-outline-secondary ml-3" onclick="copySharableLink()">Copy Link</button>
+                </div>
+                <div style="display: none;" id="recordingTools" class="mt-3">
+                    <button class="btn btn-outline-success m-2" id="upload" disabled>Upload</button>
+                    <button class="btn btn-outline-secondary m-2" id="download" disabled>Download </button>
+                    <button class="btn btn-outline-danger m-2" id="reset" disabled>Reset</button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <script src="index.js"></script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+        <script src="google.js"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 </body>
 
 </html>
