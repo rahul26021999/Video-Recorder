@@ -98,19 +98,38 @@ resetRecording.addEventListener('click', function() {
 
 async function recordScreen() {
 
-    const displayStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+    var displayMediaOptions = {
+        video: {
+            cursor: "always",
+            frameRate: 15,
+            height: 600,
+            width: 888,
+        },
+        audio: false
+    };
+    const displayStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
     // voiceStream for recording voice with screen recording
     const voiceStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
     let tracks = [...displayStream.getTracks(), ...voiceStream.getAudioTracks()]
     stream = new MediaStream(tracks);
+    console.log(stream.getVideoTracks()[0].getSettings().deviceId);
+    console.log(stream.getVideoTracks()[0].getSettings().frameRate);
+    console.log(stream.getVideoTracks()[0].getSettings().height);
+    console.log(stream.getVideoTracks()[0].getSettings().width);
+    console.log(stream.getVideoTracks()[0].getSettings().frameRate);
 }
 
 
 function createRecorder() {
     // the stream data is stored in this array
 
+    var options = {
+        audioBitsPerSecond: 64000,
+        videoBitsPerSecond: 360000,
+        mimeType: "video/webm; codecs=vp9"
+    }
     recordedChunks = [];
-    mediaRecorder = new MediaRecorder(stream);
+    mediaRecorder = new MediaRecorder(stream, options);
 
     mediaRecorder.ondataavailable = function(e) {
         if (e.data.size > 0) {
@@ -140,7 +159,7 @@ function closeTracks() {
 function saveFile() {
 
     const blob = new Blob(recordedChunks, {
-        type: 'video/mp4'
+        type: 'video/webm'
     });
     let filename = window.prompt('Enter file name');
     let downloadLink = document.createElement('a');
